@@ -14,3 +14,6 @@ Load the script in your Lua executor. A GUI will appear in the top-left corner w
 
 ## Development
 This script serves as a foundation for game automation features and can be extended with additional functionality.
+
+# Quickly acces load string thru
+loadstring(game:HttpGet("https://raw.githubusercontent.com/8Speedy/auto-lua/main/main.lua", true))() 
