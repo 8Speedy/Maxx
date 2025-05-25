@@ -1,0 +1,2 @@
+- Lightweight Lua automation code for Roblox Bubblegum Simulator
+- Features clean GUI, smart remote detection, and optimized performance for ingame use
