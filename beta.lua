@@ -2,16 +2,14 @@
 
 -- COLOR CONFIGURATION
 local COLORS = {
-    -- UI Theme
+    -- UI Colors
     background = Color3.new(0.1, 0.1, 0.1),         -- Dark grey background
-    shadow = Color3.new(0, 0, 0),                   -- Black shadow
+    background_transparency = 0.1,                   -- Background transparency
     text = Color3.new(1, 1, 1),                     -- White text
     
-    -- Button States
-    enabled_button = Color3.new(0.2, 0.8, 0.2),     -- Green when ON
+    enabled_button = Color3.new(0.2, 0.8, 0.2),       -- Green when ON
     disabled_button = Color3.new(0.220,0.220,0.220),  -- Grey when OFF
     
-    -- Control Buttons
     minimize = Color3.new(0.220,0.220,0.220),       -- Grey minimize
     close = Color3.new(0.8, 0.2, 0.2),              -- Red close
     minimized_button = Color3.new(0.1, 0.1, 0.1),   -- Dark grey background
@@ -209,6 +207,7 @@ local function createInterface()
     frame.Size = CONFIG.gui_size
     frame.Position = CONFIG.gui_position
     frame.BackgroundColor3 = COLORS.background
+    frame.BackgroundTransparency = COLORS.background_transparency
     frame.BorderSizePixel = 0
     frame.Active = true
     frame.Draggable = true
@@ -287,7 +286,7 @@ local function createInterface()
             frame.Visible = true
             minimizedButton.Visible = false
         end
-    end)
+    end
     
     -- Button events
     minimizeButton.MouseButton1Click:Connect(toggleMinimize)
