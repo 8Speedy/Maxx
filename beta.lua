@@ -1,4 +1,4 @@
--- Bubblegum Simulator Auto Hatch/Bubble (Optimized)
+-- Bubblegum Simulator Auto Hatch/Bubble
 -- Lua language
 
 -- Services
@@ -14,7 +14,8 @@ local TweenService = game:GetService("TweenService")
 local SPAM_INTERVAL = 0.4
 local BUBBLE_INTERVAL = 0.4
 local LOOP_WAIT = 0.1
-local GUI_SIZE = UDim2.new(0, 200, 0, 80)
+local GUI_SIZE = UDim2.new(0, 200, 0, 120)
+local GUI_SIZE_MINIMIZED = UDim2.new(0, 80, 0, 30)
 local GUI_POSITION = UDim2.new(0, 10, 0, 10)
 
 -- Bubble keywords for remote detection
@@ -29,7 +30,8 @@ local State = {
     autoBlowRunning = false,
     lastRTime = 0,
     bubbleRemotes = {},
-    remotesCached = false
+    remotesCached = false,
+    minimized = false
 }
 
 -- Utility functions
@@ -177,33 +179,82 @@ local function createInterface()
     frame.Draggable = true
     frame.Parent = gui
     
-    -- Buttons
+    -- Minimized button (initially hidden)
+    local minimizedButton = createButton(
+        "Auto-Lua",
+        GUI_SIZE_MINIMIZED,
+        UDim2.new(0, 0, 0, 0),
+        Color3.new(0.2, 0.6, 0.2),
+        gui
+    )
+    minimizedButton.Visible = false
+    minimizedButton.Active = true
+    minimizedButton.Draggable = true
+    
+    -- Control buttons container
+    local controlsContainer = Instance.new("Frame")
+    controlsContainer.Size = UDim2.new(1, -10, 0, 25)
+    controlsContainer.Position = UDim2.new(0, 5, 0, 5)
+    controlsContainer.BackgroundTransparency = 1
+    controlsContainer.Parent = frame
+    
+    -- Minimize button
+    local minimizeButton = createButton(
+        "-",
+        UDim2.new(0, 20, 0, 20),
+        UDim2.new(1, -50, 0, 2),
+        Color3.new(0.6, 0.6, 0.2),
+        controlsContainer
+    )
+    minimizeButton.TextSize = 16
+    
+    -- Close button
+    local closeButton = createButton(
+        "X",
+        UDim2.new(0, 20, 0, 20),
+        UDim2.new(1, -25, 0, 2),
+        Color3.new(0.8, 0.2, 0.2),
+        controlsContainer
+    )
+    closeButton.TextSize = 12
+    
+    -- Feature buttons
     local rButton = createButton(
         "R Spam: OFF",
-        UDim2.new(0, 90, 0, 30),
-        UDim2.new(0, 5, 0, 5),
+        UDim2.new(0, 180, 0, 30),
+        UDim2.new(0, 10, 0, 35),
         Color3.new(0.8, 0.2, 0.2),
         frame
     )
     
     local bubbleButton = createButton(
         "Bubble: OFF",
-        UDim2.new(0, 90, 0, 30),
-        UDim2.new(0, 105, 0, 5),
+        UDim2.new(0, 180, 0, 30),
+        UDim2.new(0, 10, 0, 70),
         Color3.new(0.2, 0.2, 0.8),
         frame
     )
     
-    local closeButton = createButton(
-        "X",
-        UDim2.new(0, 20, 0, 20),
-        UDim2.new(0, 175, 0, 55),
-        Color3.new(0.8, 0.2, 0.2),
-        frame
-    )
-    closeButton.TextSize = 12
+    local function toggleMinimize()
+        State.minimized = not State.minimized
+        
+        if State.minimized then
+            -- Minimize
+            frame.Visible = false
+            minimizedButton.Visible = true
+            minimizedButton.Position = frame.Position
+        else
+            -- Restore
+            frame.Visible = true
+            minimizedButton.Visible = false
+        end
+    end
     
     -- Button events
+    minimizeButton.MouseButton1Click:Connect(toggleMinimize)
+    
+    minimizedButton.MouseButton1Click:Connect(toggleMinimize)
+    
     rButton.MouseButton1Click:Connect(function()
         State.rKeyEnabled = not State.rKeyEnabled
         updateButtonState(
