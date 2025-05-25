@@ -2,16 +2,14 @@
 
 -- COLOR CONFIGURATION
 local COLORS = {
-    -- UI Theme
+    -- UI Colors
     background = Color3.new(0.1, 0.1, 0.1),         -- Dark grey background
-    shadow = Color3.new(0, 0, 0),                   -- Black shadow
+    background_transparency = 0.1,                   -- Background transparency
     text = Color3.new(1, 1, 1),                     -- White text
     
-    -- Button States
-    enabled_button = Color3.new(0.2, 0.8, 0.2),     -- Green when ON
+    enabled_button = Color3.new(0.2, 0.8, 0.2),       -- Green when ON
     disabled_button = Color3.new(0.220,0.220,0.220),  -- Grey when OFF
     
-    -- Control Buttons
     minimize = Color3.new(0.220,0.220,0.220),       -- Grey minimize
     close = Color3.new(0.8, 0.2, 0.2),              -- Red close
     minimized_button = Color3.new(0.1, 0.1, 0.1),   -- Dark grey background
@@ -209,23 +207,13 @@ local function createInterface()
     frame.Size = CONFIG.gui_size
     frame.Position = CONFIG.gui_position
     frame.BackgroundColor3 = COLORS.background
+    frame.BackgroundTransparency = COLORS.background_transparency
     frame.BorderSizePixel = 0
     frame.Active = true
     frame.Draggable = true
     frame.ZIndex = 2
     frame.Parent = gui
     addCornerRadius(frame, CONFIG.corner_radius + 2)
-    
-    -- Shadow frame
-    local shadowFrame = Instance.new("Frame")
-    shadowFrame.Size = UDim2.new(0, CONFIG.gui_size.X.Offset + 4, 0, CONFIG.gui_size.Y.Offset + 4)
-    shadowFrame.Position = UDim2.new(0, CONFIG.gui_position.X.Offset - 2, 0, CONFIG.gui_position.Y.Offset - 2)
-    shadowFrame.BackgroundColor3 = COLORS.shadow
-    shadowFrame.BackgroundTransparency = 0.7
-    shadowFrame.BorderSizePixel = 0
-    shadowFrame.ZIndex = 1
-    shadowFrame.Parent = gui
-    addCornerRadius(shadowFrame, CONFIG.corner_radius + 2)
     
     -- Minimized button (undraggable)
     local minimizedButton = createButton(
@@ -290,30 +278,15 @@ local function createInterface()
         if State.minimized then
             local currentFramePos = frame.Position
             frame.Visible = false
-            shadowFrame.Visible = false
             minimizedButton.Visible = true
             minimizedButton.Position = currentFramePos
         else
             local currentMinimizedPos = minimizedButton.Position
             frame.Position = currentMinimizedPos
-            shadowFrame.Position = UDim2.new(0, currentMinimizedPos.X.Offset - 2, 0, currentMinimizedPos.Y.Offset - 2)
             frame.Visible = true
-            shadowFrame.Visible = true
             minimizedButton.Visible = false
         end
     end
-    
-    -- Shadow position synchronization
-    spawn(function()
-        local lastPosition = frame.Position
-        while gui.Parent do
-            if frame.Visible and frame.Position ~= lastPosition then
-                shadowFrame.Position = UDim2.new(0, frame.Position.X.Offset - 2, 0, frame.Position.Y.Offset - 2)
-                lastPosition = frame.Position
-            end
-            wait(0.1)
-        end
-    end)
     
     -- Button events
     minimizeButton.MouseButton1Click:Connect(toggleMinimize)
