@@ -1,9 +1,13 @@
 # Bubblegum Auto Lau BETA
 
+# Bubblegum Auto Lau
+
+
 Lightweight Lua automation code for Roblox Bubblegum Simulator
 
 ## Features
 - **BETA**: (most) updates before push to main
+
 
 ## Usage
 Load the script in your Lua executor. A GUI will appear in the top-left corner with toggle buttons for each feature!
