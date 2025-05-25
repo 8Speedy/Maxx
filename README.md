@@ -1,12 +1,13 @@
+# Bubblegum Auto Lau BETA
+
 # Bubblegum Auto Lau
+
 
 Lightweight Lua automation code for Roblox Bubblegum Simulator
 
 ## Features
-- **GUI**: Simple draggable interface with toggle controls
-- **Optimized Performance**: Efficient remote caching and fallback systems
-- **Auto Bubble**: Smart bubble blowing with keyword-based remote detection
-- **Auto R inmput**: Automated R key pressing even in background
+- **BETA**: (most) updates before push to main
+
 
 ## Usage
 Load the script in your Lua executor. A GUI will appear in the top-left corner with toggle buttons for each feature!
