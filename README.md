@@ -1,10 +1,15 @@
-- 👋 Hi, I’m @8Speedy
-- 👀 I’m interested in Nature, Space, Animals
-- 🌱 I’m currently learning Mechanic
-- 💞️ I’m looking to collaborate on Nothing :)
-- 📫 How to reach me - Discord: ! 8Speedy#6765
+# Bubblegum Auto Lau BETA
 
-<!---
-8Speedy/8Speedy is a ✨ special ✨ repository because its `README.md` (this file) appears on your GitHub profile.
-You can click the Preview link to take a look at your changes.
---->
+Lightweight Lua automation code for Roblox Bubblegum Simulator
+
+## Features
+- **BETA**: (most) updates before push to main
+
+## Usage
+Load the script in your Lua executor. A GUI will appear in the top-left corner with toggle buttons for each feature!
+
+## Development
+This script serves as a foundation for game automation features and can be extended with additional functionality.
+
+## Support
+Sadly no support is available, make a request.
