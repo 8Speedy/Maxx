@@ -32,7 +32,7 @@ local CONFIG = {
     corner_radius = 8,
     
     -- Bubble detection keywords
-    bubble_keywords = {"blow", "bubble", "gum", "inflate", "chew", "pop"}
+    bubble_keywords = {"blow", "bubble"}
 }
 
 -- SERVICES & VARIABLES
@@ -295,7 +295,7 @@ local function createInterface()
     
     rButton.MouseButton1Click:Connect(function()
         State.rKeyEnabled = not State.rKeyEnabled
-        updateButtonState(rButton, State.rKeyEnabled, "R Spam: ON", "R Spam: OFF", COLORS.enabled_button, COLORS.disabled_button)
+        updateButtonState(rButton, State.rKeyEnabled, "R Auto: ON", "R Auto: OFF", COLORS.enabled_button, COLORS.disabled_button)
     end)
     
     bubbleButton.MouseButton1Click:Connect(function()
