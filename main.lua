@@ -1,8 +1,7 @@
 -- Bubblegum Simulator Auto lua
 
--- COLOR CONFIGURATION
+-- UI COLOR CONFIGURATION
 local COLORS = {
-    -- UI Colors
     background = Color3.new(0.1, 0.1, 0.1),           -- Dark grey background
     background_transparency = 0.1,                    -- Background transparency
     text = Color3.new(1, 1, 1),                       -- White text
@@ -42,7 +41,6 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local CoreGui = game:GetService("CoreGui")
 local TweenService = game:GetService("TweenService")
-
 local player = Players.LocalPlayer
 
 -- State management
@@ -139,7 +137,6 @@ local function cacheRemotes()
                 end
             end
         end
-        
         State.bubbleRemotes = remotes
         State.remotesCached = true
     end)
@@ -322,7 +319,6 @@ local function main()
                 pressRKey()
                 State.lastRTime = currentTime
             end
-            
             wait(CONFIG.loop_wait)
         end
     end)
