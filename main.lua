@@ -1,26 +1,24 @@
 -- Bubblegum Simulator Auto lua
 
--- COLOR CONFIGURATION
+-- UI COLOR CONFIGURATION
 local COLORS = {
-    -- UI Colors
-    background = Color3.new(0.1, 0.1, 0.1),         -- Dark grey background
-    background_transparency = 0.1,                   -- Background transparency
-    text = Color3.new(1, 1, 1),                     -- White text
+    background = Color3.new(0.1, 0.1, 0.1),           -- Dark grey background
+    background_transparency = 0.1,                    -- Background transparency
+    text = Color3.new(1, 1, 1),                       -- White text
     
     enabled_button = Color3.new(0.2, 0.8, 0.2),       -- Green when ON
     disabled_button = Color3.new(0.220,0.220,0.220),  -- Grey when OFF
     
-    minimize = Color3.new(0.220,0.220,0.220),       -- Grey minimize
-    close = Color3.new(0.8, 0.2, 0.2),              -- Red close
-    minimized_button = Color3.new(0.1, 0.1, 0.1),   -- Dark grey background
+    minimize = Color3.new(0.220,0.220,0.220),         -- Grey minimize
+    close = Color3.new(0.8, 0.2, 0.2),                -- Red close
+    minimized_button = Color3.new(0.1, 0.1, 0.1),     -- Dark grey background
     
-    -- Hover Effects
-    hover_transparency = 0.1                        -- Button hover transparency
+    hover_transparency = 0.1                          -- Button hover transparency
 }
 
 -- CONFIGURATION
 local CONFIG = {
-    -- Timing
+    -- Timings
     spam_interval = 0.4,
     bubble_interval = 0.4,
     loop_wait = 0.1,
@@ -43,7 +41,6 @@ local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local VirtualInputManager = game:GetService("VirtualInputManager")
 local CoreGui = game:GetService("CoreGui")
 local TweenService = game:GetService("TweenService")
-
 local player = Players.LocalPlayer
 
 -- State management
@@ -80,7 +77,6 @@ local function createGui()
     if not safeCall(function() gui.Parent = CoreGui end) then
         safeCall(function() gui.Parent = player:WaitForChild("PlayerGui") end)
     end
-    
     return gui
 end
 
@@ -105,7 +101,6 @@ local function createButton(text, size, position, color, parent)
         TweenInfo.new(0.2, Enum.EasingStyle.Quad),
         {BackgroundTransparency = COLORS.hover_transparency}
     )
-    
     button.MouseEnter:Connect(function() hoverTween:Play() end)
     button.MouseLeave:Connect(function() hoverTween:Reverse() end)
     
@@ -142,7 +137,6 @@ local function cacheRemotes()
                 end
             end
         end
-        
         State.bubbleRemotes = remotes
         State.remotesCached = true
     end)
@@ -305,8 +299,7 @@ local function createInterface()
         if State.autoBubbleEnabled then
             startAutoBubble()
         end
-    end)
-    
+    end) 
     return gui
 end
 
@@ -326,7 +319,6 @@ local function main()
                 pressRKey()
                 State.lastRTime = currentTime
             end
-            
             wait(CONFIG.loop_wait)
         end
     end)
